@@ -1,9 +1,16 @@
 import 'dart:ui';
-
+import 'package:todoey/widgets/tasks_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'add_task_bottom_screen.dart';
 
 class TaskScreen extends StatelessWidget {
+  // Widget buildBottomSheet(BuildContext context) {
+  //   return Container(
+  //     child: Center(child: Text("This is Bottom Sheet")),
+  //   );
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,7 +18,13 @@ class TaskScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: Colors.lightBlueAccent,
         icon: Icon(Icons.add),
-        label: Text("SAVE"),
+        label: Text("ADD"),
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            builder: (context) => AddTaskBottomScreen(),
+          );
+        },
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,6 +68,7 @@ class TaskScreen extends StatelessWidget {
           ),
           Expanded(
             child: Container(
+              child: TasksList(),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
