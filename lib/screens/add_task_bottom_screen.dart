@@ -4,7 +4,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+String newTodo;
+
 class AddTaskBottomScreen extends StatelessWidget {
+  final Function addTaskCallback;
+
+  AddTaskBottomScreen({this.addTaskCallback});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -34,6 +40,9 @@ class AddTaskBottomScreen extends StatelessWidget {
               TextField(
                 autofocus: true,
                 textAlign: TextAlign.center,
+                onChanged: (nv) {
+                  newTodo = nv;
+                },
               ),
               SizedBox(
                 height: 30,
@@ -45,7 +54,9 @@ class AddTaskBottomScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 color: Colors.lightBlueAccent,
-                onPressed: () {},
+                onPressed: () {
+                  addTaskCallback(newTodo);
+                },
                 child: Text(
                   "ADD",
                   style: TextStyle(

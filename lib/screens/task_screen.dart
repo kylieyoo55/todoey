@@ -1,18 +1,17 @@
 import 'dart:ui';
+import 'package:todoey/models/task_data.dart';
 import 'package:todoey/widgets/tasks_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'add_task_bottom_screen.dart';
+import 'package:todoey/models/task.dart';
+import 'package:provider/provider.dart';
 
 class TaskScreen extends StatelessWidget {
-  // Widget buildBottomSheet(BuildContext context) {
-  //   return Container(
-  //     child: Center(child: Text("This is Bottom Sheet")),
-  //   );
-  // }
-
   @override
   Widget build(BuildContext context) {
+    //Provider Task List
+    List<Task> tasks = Provider.of<TaskData>(context).tasks;
     return Scaffold(
       backgroundColor: Colors.lightBlueAccent,
       floatingActionButton: FloatingActionButton.extended(
@@ -22,7 +21,12 @@ class TaskScreen extends StatelessWidget {
         onPressed: () {
           showModalBottomSheet(
             context: context,
-            builder: (context) => AddTaskBottomScreen(),
+            builder: (context) => AddTaskBottomScreen(addTaskCallback: (nv) {
+              // setState(() {
+              //   tasks.add(Task(name: nv));
+              // });
+              Navigator.pop(context);
+            }),
           );
         },
       ),
@@ -54,7 +58,7 @@ class TaskScreen extends StatelessWidget {
                       color: Colors.white),
                 ),
                 Text(
-                  "12 Tasks",
+                  "${Provider.of<TaskData>(context).taskCount} Tasks",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18,
