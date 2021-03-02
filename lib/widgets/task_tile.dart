@@ -1,6 +1,8 @@
 import 'dart:ui';
 import 'package:todoey/models/task.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todoey/models/task_data.dart';
 
 class TaskTile extends StatelessWidget {
   final bool isChecked;
@@ -14,6 +16,8 @@ class TaskTile extends StatelessWidget {
     return Container(
       height: 45,
       child: ListTile(
+        onLongPress: () =>
+            Provider.of<TaskData>(context, listen: false).deleteTask(taskTitle),
         title: Text(
           taskTitle,
           style: TextStyle(

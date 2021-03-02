@@ -1,16 +1,14 @@
 import 'dart:ui';
-
+import 'package:todoey/models/task.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
+import 'package:todoey/models/task_data.dart';
 
 String newTodo;
 
 class AddTaskBottomScreen extends StatelessWidget {
-  final Function addTaskCallback;
-
-  AddTaskBottomScreen({this.addTaskCallback});
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -55,7 +53,9 @@ class AddTaskBottomScreen extends StatelessWidget {
                 ),
                 color: Colors.lightBlueAccent,
                 onPressed: () {
-                  addTaskCallback(newTodo);
+                  Provider.of<TaskData>(context, listen: false)
+                      .addTask(newTodo);
+                  Navigator.pop(context);
                 },
                 child: Text(
                   "ADD",
